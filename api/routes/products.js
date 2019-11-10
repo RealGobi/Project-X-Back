@@ -45,6 +45,7 @@ router.post('/', (req, res, next) => {
 
 //Get by id
 router.get('/:productId', (req, res, next) => {
+// get product id from url
     const id = req.params.productId; 
     Product.findById(id)
     .exec()
@@ -68,6 +69,7 @@ router.get('/:productId', (req, res, next) => {
 router.patch('/:productId', (req, res, next) => {
     const id = req.params.productId;
     const updateOps = {};
+// look only att feild that has change ex. to update { "propName": "name", "value": "jimmy" },{ "propName": "price", "value": "999" }
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
