@@ -10,7 +10,7 @@ const productRoutes = require('./api/routes/products');
 const ordersRoutes = require('./api/routes/orders');
 
 // mongoose
-mongoose.connect('mongodb+srv://dinner:mat@letdodinner-d3sve.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true } );
+mongoose.connect('mongodb+srv://dinner:' + process.env.db_pass + '@letdodinner-d3sve.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true } );
 
 // middleware
 app.use(morgan('dev'));
