@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 // routes
 const productRoutes = require('./api/routes/products');
 const ordersRoutes = require('./api/routes/orders');
+const userRoutes = require('./api/routes/user');
 
 // mongoose
 mongoose.connect('mongodb+srv://dinner:' + process.env.db_pass + '@letdodinner-d3sve.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true } );
@@ -32,6 +33,7 @@ app.use((req, res, next) => {
 // go to routes
 app.use('/products', productRoutes);
 app.use('/orders', ordersRoutes);
+app.use('/user', userRoutes);
 
 
 // catch error
