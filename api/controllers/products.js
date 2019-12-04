@@ -1,34 +1,10 @@
 const mongoose = require('mongoose');
 const Product = require('../models/products');
 
-exports.getAllProducts = (req, res, next) => {
+exports.getAllProducts = (req, res) => {
     Product.find()
-    .select('name price _id')
-    .exec()
-    .then(docs => {
-        const respones = {
-            count: docs.length,
-            products: docs.map(doc => {
-                return {
-                    name: doc.name,
-                    price: doc.price,
-                    _id: doc._id,
-                    request: {
-                        type: 'GET',
-                        url: 'http://localhost:3000/products/' + doc._id
-                    }
-                };
-            })
-        };
-        res.status(200).json(respones);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
-    });
-};
+      .then(items => res.json(items));
+  };
 
 exports.postProducts = (req, res, next) => {
     const product = new Product({
@@ -46,10 +22,6 @@ exports.postProducts = (req, res, next) => {
                 name: result.name,
                 price: result.price,
                 _id: result._id,
-                request: {
-                    type: 'GET',
-                    url: 'http://localhost:3000/products/' + result._id
-                }
             }
         });
     })
@@ -73,10 +45,6 @@ exports.updateProducts = (req, res, next) => {
     .then(
         res.status(200).json({
             message: 'Product Updated',
-            request: {
-                type: 'GET',
-                url: 'http://localhost:3000/products/' + id
-            }
         })
     )
     .catch(err => {
