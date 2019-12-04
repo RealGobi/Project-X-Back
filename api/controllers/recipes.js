@@ -1,27 +1,36 @@
 const mongoose = require('mongoose');
-const Product = require('../models/products');
+const Recipe = require('../models/recipes');
 
-exports.getAllProducts = (req, res) => {
-    Product.find()
+exports.getAllRecipes = (req, res) => {
+    Recipe.find()
       .then(items => res.json(items));
   };
 
-exports.postProducts = (req, res, next) => {
-    const product = new Product({
+exports.postRecipes = (req, res, next) => {
+    const recipe = new Recipe({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         price: req.body.price
     });
-    product
+    recipe
     .save()
     .then(result => {
         console.log(result);
         res.status(201).json({
             messege:  'Created successfully',
-            createdProduct: {
-                name: result.name,
-                price: result.price,
+            createdRecipe: {
                 _id: result._id,
+                title: result.title,
+                description: result.description,
+                category1: result.category1,
+                category2: result.category2,
+                imagesLink: result.imagesLink,
+                time: result.time,
+                ingredients: result.ingredients,
+                instructions: result.instructions,
+                allergy: result.allergy,
+                color: result.color,
+                rating: result.rating,
             }
         });
     })
@@ -33,18 +42,18 @@ exports.postProducts = (req, res, next) => {
     });
 }
 
-exports.updateProducts = (req, res, next) => {
-    const id = req.params.productId;
+exports.updateRecipes = (req, res, next) => {
+    const id = req.params.recipeId;
     const updateOps = {};
 // look only att feild that has change ex. to update[ { "propName": "name", "value": "jimmy" },{ "propName": "price", "value": "999" }]
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
-    Product.updateOne({_id: id}, { $set: updateOps })
+    Recipe.updateOne({_id: id}, { $set: updateOps })
     .exec()
     .then(
         res.status(200).json({
-            message: 'Product Updated',
+            message: 'Recipe Updated',
         })
     )
     .catch(err => {
@@ -55,10 +64,10 @@ exports.updateProducts = (req, res, next) => {
     });
 }
 
-exports.getSingleProducts = (req, res, next) => {
-    // get product id from url
-        const id = req.params.productId; 
-        Product.findById(id)
+exports.getSingleRecipes = (req, res, next) => {
+    // get recipe id from url
+        const id = req.params.recipeId; 
+        Recipe.findById(id)
         .select('name price _id')
         .exec()
         .then(doc => {
@@ -77,9 +86,9 @@ exports.getSingleProducts = (req, res, next) => {
         });
     }
 
-exports.deleteProducts =  (req, res, next) => {
-    const id = req.params.productId
-    Product.deleteOne({_id: id})
+exports.deleteRecipes =  (req, res, next) => {
+    const id = req.params.recipeId
+    Recipe.deleteOne({_id: id})
     .exec()
     .then(
         res.status(200).json({
