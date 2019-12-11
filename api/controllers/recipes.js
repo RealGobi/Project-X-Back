@@ -9,8 +9,17 @@ exports.getAllRecipes = (req, res) => {
 exports.postRecipes = (req, res, next) => {
     const recipe = new Recipe({
         _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        price: req.body.price
+        title: req.body.title,
+        description: req.body.description,
+        category1: req.body.category1,
+        category2: req.body.category2,
+        imagesLink: req.body.imagesLink,
+        time: req.body.time,
+        ingredients: req.body.ingredients,
+        instructions: req.body.instructions,
+        allergy: req.body.allergy,
+        rating: req.body.rating,
+        foodType: req.body.foodType,
     });
     recipe
     .save()
@@ -29,8 +38,8 @@ exports.postRecipes = (req, res, next) => {
                 ingredients: result.ingredients,
                 instructions: result.instructions,
                 allergy: result.allergy,
-                color: result.color,
                 rating: result.rating,
+                foodType: result.foodType,
             }
         });
     })
