@@ -14,9 +14,6 @@ router.get('/', RecipeController.getAllRecipes);
 // Post
 router.post('/', checkAuth, RecipeController.postRecipes);
 
-//Get by id
-router.get('/:recipeId', RecipeController.getSingleRecipes);
-
 // Patch $set-mongoose 
 router.patch('/:recipeId', checkAuth, RecipeController.updateRecipes);
 

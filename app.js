@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 
 // routes
 const recipeRoutes = require('./api/routes/recipes');
-const ordersRoutes = require('./api/routes/orders');
 const userRoutes = require('./api/routes/user');
 
 // mongoose
@@ -32,7 +31,6 @@ app.use((req, res, next) => {
 
 // go to routes
 app.use('/recipes', recipeRoutes);
-app.use('/orders', ordersRoutes);
 app.use('/user', userRoutes);
 
 
