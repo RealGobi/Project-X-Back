@@ -23,7 +23,10 @@ exports.signUpUser =  (req, res, next) => {
                 const user = new User({
                     _id: new mongoose.Types.ObjectId(),
                     email: req.body.email,
-                    password: hash
+                    password: hash, 
+                    name: req.body.name,
+                    foodType: req.body.foodType,
+                    isAdmin: req.body.isAdmin
                     });
                     user.save()
                     .then(result => {
