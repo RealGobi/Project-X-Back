@@ -1,23 +1,24 @@
-const express = require('express');
-const router = express.Router();
-const RecipeController = require('../controllers/recipes');
 
-// check auth
-const checkAuth = require('../middleware/checkAuth');
+const express = require('express');
+const router = express.Router();
+const RecipeController = require('../controllers/recipes');
+
+// check auth
+const checkAuth = require('../middleware/checkAuth');
 
 
-//handeling routes
+//handeling routes
 
-// Get
-router.get('/', RecipeController.getAllRecipes);
+// Get
+router.get('/', RecipeController.getAllRecipes);
 
-// Post
-router.post('/', checkAuth, RecipeController.postRecipes);
+// Post
+router.post('/', checkAuth, RecipeController.postRecipes);
 
-// Patch $set-mongoose 
-router.patch('/:recipeId', checkAuth, RecipeController.updateRecipes);
+// Patch $set-mongoose 
+router.patch('/:recipeId', checkAuth, RecipeController.updateRecipes);
 
-//Delete by id
-router.delete('/:recipeId', checkAuth, RecipeController.deleteRecipes);
+//Delete by id
+router.delete('/:recipeId', checkAuth, RecipeController.deleteRecipes);
 
-module.exports = router;
+module.exports = router;
